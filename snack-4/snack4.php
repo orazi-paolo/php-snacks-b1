@@ -15,7 +15,28 @@ require_once __DIR__ . '/list_classes.php';
 </head>
 
 <body>
-
+    <?php foreach ($classi as $classe => $studente) { ?>
+    <ul>
+        <li>
+            <?php echo $classe; ?>
+        </li>
+        <?php
+            foreach ($studente as $description) {
+            ?>
+        <li>
+            <?php
+                    echo $description['nome'] . ' ' . $description['cognome'] . ', ' . $description['anni'] . ' anni, ' . 'voto medio: ' . $description['voto_medio'] . ', linguaggio preferito: ' . $description['linguaggio_preferito'];
+                    ?>
+        </li>
+        <li>
+            <img src="<?php echo $description['immagine']; ?>"
+                alt="<?php echo $description['nome'] . ' ' . $description['cognome']; ?>">
+        </li>
+        <?php
+            }
+            ?>
+    </ul>
+    <?php } ?>
 </body>
 
 </html>
