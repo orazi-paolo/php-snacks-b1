@@ -16,8 +16,6 @@ require_once __DIR__ . '/list_classes.php';
 </head>
 
 <body>
-    <!-- Snack 4D:
-Aggiungiamo un input che consenta l’inserimento del linguaggio di programmazione preferito, e filtriamo in base ad esso solo gli studenti che abbiano quel linguaggio come preferito. -->
     <header>
         <!-- form per inserire il voto medio massimo -->
         <form action="snack4.php" method="get">
@@ -50,19 +48,24 @@ Aggiungiamo un input che consenta l’inserimento del linguaggio di programmazio
                     if (empty($_GET['vote'])) {
                         $_GET['vote'] = 10;
                     }
+                    // se non c'è il linguaggio di programmazione, lo setto a vuoto
+                    isset($_GET['programming_language']) ? strtolower(trim($_GET['programming_language'])) : $_GET['programming_language'] = '';
                     // filtro tra gli studenti con voto medio minore del voto inserito
                     if ($description['voto_medio'] < $_GET['vote']) {
-                        // filtro tra gli studenti con voto medio maggiore di 6
-                        // if ($description['voto_medio'] > 6) {
+                        // filtro tra gli studenti con linguaggio di programmazione preferito uguale a quello inserito oppure se non è stato inserito nessun linguaggio
+                        if (empty($_GET['programming_language']) || strtolower($description['linguaggio_preferito']) == $_GET['programming_language']) {
+                            // filtro tra gli studenti con voto medio maggiore di 6
+                            // if ($description['voto_medio'] > 6) {
                 ?>
             <li>
                 <?php
-                            echo $description['nome'] . ' ' . $description['cognome'] . ', ' . $description['anni'] . ' anni, ' . 'voto medio: ' . $description['voto_medio'] . ', linguaggio preferito: ' . $description['linguaggio_preferito'];
-                            ?>
+                                echo $description['nome'] . ' ' . $description['cognome'] . ', ' . $description['anni'] . ' anni, ' . 'voto medio: ' . $description['voto_medio'] . ', linguaggio preferito: ' . $description['linguaggio_preferito'];
+                                ?>
                 <img src="<?php echo $description['immagine']; ?>"
                     alt="<?php echo $description['nome'] . ' ' . $description['cognome']; ?>">
             </li>
             <?php
+                        }
                         // }
                     }
                 }
