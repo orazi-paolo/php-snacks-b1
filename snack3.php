@@ -47,10 +47,13 @@ $db = [
     <h2>
         PM
     </h2>
-    <ul class="g">
+    <!-- giro nella lista dei pm e stampo in pagina il nome e cognome di ogni pm -->
+    <ul class="green">
+        <?php foreach ($db['pm'] as $pm) { ?>
         <li>
-
+            <?php echo $pm['name'] . ' ' . $pm['lastname'] ?>
         </li>
+        <?php } ?>
     </ul>
 
 </body>
@@ -59,5 +62,9 @@ $db = [
 <style>
 .gray {
     background-color: gray;
+}
+
+.green {
+    background-color: green;
 }
 </style>
