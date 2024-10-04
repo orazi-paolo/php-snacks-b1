@@ -16,15 +16,23 @@ require_once __DIR__ . '/list_classes.php';
 </head>
 
 <body>
+    <!-- Snack 4D:
+Aggiungiamo un input che consenta l’inserimento del linguaggio di programmazione preferito, e filtriamo in base ad esso solo gli studenti che abbiano quel linguaggio come preferito. -->
     <header>
         <!-- form per inserire il voto medio massimo -->
         <form action="snack4.php" method="get">
             <div class="mb-3">
-                <label class="input-group-number" id="vote">Maximum average rating</label>
+                <!-- input per il voto medio massimo -->
+                <label class="input-group-text" id="vote">Maximum average rating</label>
                 <input type="number" name="vote" aria-label="vote" aria-describedby="vote" placeholder="from 0 to 10"
                     min="0" max="10" style="width: 300px;">
-                <button type="submit">Send</button>
+                <!-- input per il linguaggio di programmazione -->
+                <label class="input-group-text" id="programming_language">Programming language</label>
+                <input type="text" name="programming_language" aria-label="programming_language"
+                    aria-describedby="programming_language" placeholder="Insert a programming language"
+                    style="width: 300px;">
             </div>
+            <button type="submit">Send</button>
         </form>
 
     </header>
