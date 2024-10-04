@@ -16,16 +16,15 @@ require_once __DIR__ . '/list_classes.php';
 </head>
 
 <body>
-    <!-- Snack 4C:
-filtriamo in base ad esso solo gli studenti che abbiano una media esclusivamente inferiore al voto inserito. -->
     <header>
+        <!-- form per inserire il voto medio massimo -->
         <form action="snack4.php" method="get">
             <div class="mb-3">
                 <label class="input-group-number" id="vote">Maximum average rating</label>
                 <input type="number" name="vote" aria-label="vote" aria-describedby="vote" placeholder="from 0 to 10"
                     min="0" max="10" style="width: 300px;">
+                <button type="submit">Send</button>
             </div>
-            <button type="submit">Send</button>
         </form>
 
     </header>
@@ -39,18 +38,25 @@ filtriamo in base ad esso solo gli studenti che abbiano una media esclusivamente
             <?php
                 // ciclo sull array dello studente per prendere i suoi valori come nome ecc...
                 foreach ($studente as $description) {
-                    // filtro tra gli studenti con voto medio maggiore di 6
-                    // if ($description['voto_medio'] > 6) {
+                    // se non c'è il voto medio massimo, lo setto a 10
+                    if (empty($_GET['vote'])) {
+                        $_GET['vote'] = 10;
+                    }
+                    // filtro tra gli studenti con voto medio minore del voto inserito
+                    if ($description['voto_medio'] < $_GET['vote']) {
+                        // filtro tra gli studenti con voto medio maggiore di 6
+                        // if ($description['voto_medio'] > 6) {
                 ?>
             <li>
                 <?php
-                        echo $description['nome'] . ' ' . $description['cognome'] . ', ' . $description['anni'] . ' anni, ' . 'voto medio: ' . $description['voto_medio'] . ', linguaggio preferito: ' . $description['linguaggio_preferito'];
-                        ?>
+                            echo $description['nome'] . ' ' . $description['cognome'] . ', ' . $description['anni'] . ' anni, ' . 'voto medio: ' . $description['voto_medio'] . ', linguaggio preferito: ' . $description['linguaggio_preferito'];
+                            ?>
                 <img src="<?php echo $description['immagine']; ?>"
                     alt="<?php echo $description['nome'] . ' ' . $description['cognome']; ?>">
             </li>
             <?php
-                    // }
+                        // }
+                    }
                 }
                 ?>
         </ul>
